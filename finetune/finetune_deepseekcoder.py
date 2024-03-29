@@ -151,8 +151,7 @@ def train():
 
 
     raw_train_datasets = load_dataset(
-        'json',
-        data_files=data_args.data_path,
+        data_args.data_path,
         split="train",
         cache_dir=training_args.cache_dir
     )
@@ -162,8 +161,7 @@ def train():
     train_dataset = raw_train_datasets.map(
         train_tokenize_function,
         batched=True,
-        batch_size=3000,
-        num_proc=32,
+        batch_size=16,
         remove_columns=raw_train_datasets.column_names,
         load_from_cache_file=True, # not args.overwrite_cache
         desc="Running Encoding",
